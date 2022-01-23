@@ -2,10 +2,10 @@ import Counter from './components/Counter';
 import Search from './components/Search';
 import List from './components/List';
 import Item from './components/Item';
-
+import CreateItemButton from './components/CreateItemButton';
 const todos = [
   { text: 'Primera tarea', completed: false },
-  { text: 'Primera segunda', completed: false },
+  { text: 'Primera segunda', completed: true },
   { text: 'Primera tercera', completed: false },
   { text: 'Primera cuarta', completed: false },
 
@@ -18,10 +18,11 @@ function App() {
       <Search />
       <List>
         {todos.map(todo => (
-          <Item id={todo.text}>{todo.text}</Item>
+          <Item key={todo.text} text={todo.text} completed={todo.completed} />
         ))
         }
       </List>
+      <CreateItemButton />
     </>
   );
 }

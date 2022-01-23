@@ -1,10 +1,13 @@
 import React from 'react';
+import '../styles/List.css'
 
 const List = ({ children }) => {
   return (
-    <ul>
-      {children}
-    </ul>
+    <section>
+      <ul>
+        {children}
+      </ul>
+    </section>
   );
 };
 
