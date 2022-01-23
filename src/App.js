@@ -1,24 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import Counter from './components/Counter';
+import Search from './components/Search';
+import List from './components/List';
+import Item from './components/Item';
+
+const todos = [
+  { text: 'Primera tarea', completed: false },
+  { text: 'Primera segunda', completed: false },
+  { text: 'Primera tercera', completed: false },
+  { text: 'Primera cuarta', completed: false },
+
+]
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Counter />
+      <Search />
+      <List>
+        {todos.map(todo => (
+          <Item id={todo.text}>{todo.text}</Item>
+        ))
+        }
+      </List>
+    </>
   );
 }
 
