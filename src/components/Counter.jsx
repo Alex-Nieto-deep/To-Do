@@ -1,10 +1,10 @@
-import styled from 'styled-components';
 import '../styles/Counter.css'
 
 
-const Counter = () => {
+const Counter = ({ total, completed }) => {
+  console.log(total);
   return <div>
-    <h1 className="Counter">Has completado 2 de 4 tareas</h1>
+    <h1 className="Counter">Has completado {completed} de {total} tareas</h1>
   </div>;
 };
 
