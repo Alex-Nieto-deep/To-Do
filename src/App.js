@@ -5,10 +5,18 @@ import List from './components/List';
 import Item from './components/Item';
 import CreateItemButton from './components/CreateItemButton';
 import { TodoContext } from './context';
+import AddItem from './modal/AddItem';
+import Form from './components/Form';
 
 function App() {
-  const { searchedTodos, toggleCompleteTodo, deleteTodo } = useContext(TodoContext);
-  console.log(searchedTodos);
+  const { searchedTodos,
+    toggleCompleteTodo,
+    deleteTodo,
+    addItem,
+    setAddItem,
+    editItem,
+    setEditItem
+  } = useContext(TodoContext);
   return (
     <>
       <Counter />
@@ -24,7 +32,15 @@ function App() {
           />
         ))}
       </List>
-      <CreateItemButton />
+      {addItem && (
+        <AddItem>
+          <Form />
+        </AddItem>
+      )}
+      <CreateItemButton
+        setAddItem={setAddItem}
+        addItem={addItem}
+      />
     </>
   );
 }

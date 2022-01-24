@@ -15,6 +15,10 @@ function TodoProvider({ children }) {
   const [todos, setTodos] = useState(todosExample);
   const [searchValue, setSearchValue] = useState('');
 
+  // state to add the modals
+  const [addItem, setAddItem] = useState(false);
+  const [editItem, setEditItem] = useState(false);
+
   const completedTodos = todos.filter(todo => todo.completed).length;
   const totalTodos = todos.length;
 
@@ -45,14 +49,26 @@ function TodoProvider({ children }) {
     setTodos(newTodos);
   }
 
+  const addTodo = (text) => {
+    const newTodos = [...todos];
+    newTodos.push({ text, completed: false });
+    setTodos(newTodos);
+  }
+
   return (
     <TodoContext.Provider value={{
       totalTodos,
       completedTodos,
+      searchValue,
       setSearchValue,
       searchedTodos,
       toggleCompleteTodo,
       deleteTodo,
+      addItem,
+      setAddItem,
+      editItem,
+      setEditItem,
+      addTodo
     }}>
       {children}
     </TodoContext.Provider>

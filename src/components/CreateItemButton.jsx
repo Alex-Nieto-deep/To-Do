@@ -1,9 +1,15 @@
 import React from 'react';
 import '../styles/CreateItemButton.css';
 
-function CreateItemButton(props) {
+function CreateItemButton({ setAddItem, addItem }) {
+
   return (
-    <button className="CreateItemButton">+</button>
+    <button
+      className="CreateItemButton"
+      onClick={() => setAddItem(!addItem)}
+    >
+      +
+    </button>
   );
 }
 
