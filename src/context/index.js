@@ -66,8 +66,8 @@ function TodoProvider({ children }) {
     const newTodos = [...todos];
     newTodos[index] = { text, completed: false }
     setTodos(newTodos);
-
   }
+
   return (
     <TodoContext.Provider value={{
       totalTodos,

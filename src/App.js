@@ -14,8 +14,7 @@ function App() {
     deleteTodo,
     addItem,
     setAddItem,
-    editItem,
-    setEditItem
+    editItem
   } = useContext(TodoContext);
   return (
     <>

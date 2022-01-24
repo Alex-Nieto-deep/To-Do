@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { TodoContext } from '../context';
 import '../styles/Search.css'
+import ButtonApi from './ButtonApi';
 
 
 const Search = () => {
@@ -13,12 +14,16 @@ const Search = () => {
   }
 
   return (
-    <input
-      className="Search"
-      placeholder="Buscar"
-      value={searchValue}
-      onChange={onSearchChange}
-    />
+    <div style={{ textAlign: 'center', }}>
+      <input
+        className="Search"
+        placeholder="Buscar"
+        value={searchValue}
+        onChange={onSearchChange}
+        style={{ marginBottom: 20 }}
+      />
+      <ButtonApi />
+    </div>
   );
 };
 
