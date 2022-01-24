@@ -18,6 +18,34 @@ function App() {
 
   const completedTodos = todos.filter(todo => todo.completed).length;
   const totalTodos = todos.length;
+
+  let searchedTodos = [];
+
+  if (!(searchValue.length >= 1)) {
+    searchedTodos = todos;
+  } else {
+    searchedTodos = todos.filter(todo => {
+      const todoText = todo.text.toLowerCase()
+      const searchText = searchValue.toLowerCase()
+      return todoText.includes(searchText);
+    })
+  }
+
+  const toggleCompleteTodo = (text) => {
+    const index = todos.findIndex(todo => todo.text === text);
+    const newTodos = [...todos];
+    newTodos[index].completed = !newTodos[index].completed;
+    setTodos(newTodos);
+  }
+
+  const deleteTodo = (text) => {
+    const index = todos.findIndex(todo => todo.text === text);
+    const newTodos = [...todos];
+    // delete newTodos[index]
+    newTodos.splice(index, 1);
+    setTodos(newTodos);
+  }
+
   return (
     <>
       <Counter
@@ -26,11 +54,13 @@ function App() {
       />
       <Search searchValue={searchValue} setSearchValue={setSearchValue} />
       <List>
-        {todos.map(todo => (
+        {searchedTodos.map(todo => (
           <Item
             key={todo.text}
             text={todo.text}
             completed={todo.completed}
+            toggleCompleteTodo={() => toggleCompleteTodo(todo.text)}
+            deleteTodo={() => deleteTodo((todo.text))}
           />
         ))
         }
