@@ -5,32 +5,48 @@ import '../styles/Form.css'
 const Form = () => {
 
   const [newTodoValue, setNewTodoValue] = useState('');
-  const { addTodo, setAddItem, addItem } = useContext(TodoContext);
+  // state for save the value edited
+  const [saveEdited, setSaveEdited] = useState('');
+  const { addTodo, setAddItem, setEditItem, editItem, modifyTodo, findIndexTodo } = useContext(TodoContext);
 
   const onCancel = () => {
-
+    setAddItem(false);
+    setEditItem(false);
   }
 
   const onSubmit = (event) => {
     event.preventDefault();
-    console.log(newTodoValue);
+    if (newTodoValue.length <= 0) return;
     addTodo(newTodoValue);
-    setAddItem(!addItem)
+    setNewTodoValue('')
   }
 
   const onChange = (event) => {
     setNewTodoValue(event.target.value);
+    setSaveEdited(event.target.value)
   }
 
+  const onModify = (event) => {
+    event.preventDefault();
+    modifyTodo(findIndexTodo, saveEdited)
+    setSaveEdited('');
+    setEditItem(false)
+  }
 
   return (
-    <form onSubmit={onSubmit} >
-      <label>Nueva tarea</label>
-      <textarea
-        value={newTodoValue}
+    <form onSubmit={!editItem ? onSubmit : onModify} >
+      <label>{editItem ? 'Editar la tarea' : 'Nueva Tarea'}</label>
+      {!editItem ? (
+        <textarea
+          value={newTodoValue}
+          onChange={onChange}
+          placeholder="Escribe una nueva tarea"
+        />
+      ) : <textarea
+        value={saveEdited}
         onChange={onChange}
-        placeholder="Escribe una nueva tarea"
-      />
+        placeholder="Modificar tarea"
+      />}
       <div className="TodoForm-buttonContainer">
         <button
           type="button"
@@ -40,12 +56,19 @@ const Form = () => {
           Cancelar
         </button>
 
-        <button
+        {!editItem ? (<button
           className="TodoForm-button TodoForm-button-add"
           type="submit"
         >
           Añadir
-        </button>
+        </button>) : (
+          <button
+            className="TodoForm-button TodoForm-button-add"
+            type="submit"
+          >
+            Guardar
+          </button>)
+        }
       </div>
     </form>
 

@@ -2,10 +2,10 @@ import { createContext, useState } from 'react';
 // import useInitialValue from './useInitialValue'
 
 const todosExample = [
-  { text: 'Primera tarea', completed: false },
-  { text: 'Primera segunda', completed: true },
-  { text: 'Primera tercera', completed: false },
-  { text: 'Primera cuarta', completed: false },
+  { text: 'Realizar Compra', completed: false },
+  { text: 'Sacar al perro', completed: true },
+  { text: 'Preparar regalo', completed: false },
+  { text: 'Buscar a los niños', completed: false },
 ]
 
 
@@ -18,6 +18,9 @@ function TodoProvider({ children }) {
   // state to add the modals
   const [addItem, setAddItem] = useState(false);
   const [editItem, setEditItem] = useState(false);
+
+  // state for index todo
+  const [findIndexTodo, setfindIndexTodo] = useState(-1);
 
   const completedTodos = todos.filter(todo => todo.completed).length;
   const totalTodos = todos.length;
@@ -55,6 +58,16 @@ function TodoProvider({ children }) {
     setTodos(newTodos);
   }
 
+  const findIndex = (text) => {
+    const index = todos.findIndex(todo => todo.text === text);
+    setfindIndexTodo(index)
+  }
+  const modifyTodo = (index, text) => {
+    const newTodos = [...todos];
+    newTodos[index] = { text, completed: false }
+    setTodos(newTodos);
+
+  }
   return (
     <TodoContext.Provider value={{
       totalTodos,
@@ -68,7 +81,10 @@ function TodoProvider({ children }) {
       setAddItem,
       editItem,
       setEditItem,
-      addTodo
+      addTodo,
+      findIndex,
+      modifyTodo,
+      findIndexTodo
     }}>
       {children}
     </TodoContext.Provider>

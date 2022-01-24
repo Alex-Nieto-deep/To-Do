@@ -1,12 +1,13 @@
-import React from 'react';
 import '../styles/CreateItemButton.css';
 
 function CreateItemButton({ setAddItem, addItem }) {
-
+  const onClickState = () => {
+    setAddItem(!addItem);
+  }
   return (
     <button
       className="CreateItemButton"
-      onClick={() => setAddItem(!addItem)}
+      onClick={onClickState}
     >
       +
     </button>

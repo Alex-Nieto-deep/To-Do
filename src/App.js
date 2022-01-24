@@ -32,7 +32,7 @@ function App() {
           />
         ))}
       </List>
-      {addItem && (
+      {(addItem || editItem) && (
         <AddItem>
           <Form />
         </AddItem>
